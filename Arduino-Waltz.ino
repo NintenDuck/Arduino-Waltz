@@ -2,8 +2,8 @@
 #include <SD.h>
 #include "TMRpcm.h"
 
-#define next
-#defin _pause
+#define NEXT
+#defin _PAUSE
 
 TMRpcm AUDIO;
 File ROOT;
@@ -11,6 +11,7 @@ File ROOT;
 char sd_root = "/"
 
 int SPEAKER_PIN = 9;
+
 int DEFAULT_AUDIO_VOLUME = 7;
 int DEFAULT_AUDIO_QUALITY = 1;
 
