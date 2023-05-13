@@ -2,13 +2,13 @@
 #include <SD.h>
 #include "TMRpcm.h"
 
-#define NEXT
-#define _PAUSE
+// #define NEXT
+// #define _PAUSE
 
 TMRpcm AUDIO;
 File ROOT;
 
-char sd_root = "/"
+char SD_ROOT = "/";
 
 int SPEAKER_PIN = 9;
 
@@ -25,9 +25,17 @@ void init_sd(){
 }
 
 void init_audio(){
-	AUDIO.speakerPin = speakerPin;
+	AUDIO.speakerPin = SPEAKER_PIN;
 	AUDIO.setVolume( DEFAULT_AUDIO_VOLUME );
 	AUDIO.quality( DEFAULT_AUDIO_QUALITY );
+}
+
+void play_audio( char* song_name='none' ){
+	if ( song_name == 'none' ) return;
+
+	AUDIO.play( song_name );
+	Serial.print( "Playing song: " );
+	Serial.println( song_name );
 }
 
 void setup() {
@@ -37,7 +45,7 @@ void setup() {
 	init_sd();
 	init_audio();
 	
-	ROOT = SD.open( sd_root );
+	ROOT = SD.open( SD_ROOT );
 }
 
 
@@ -46,11 +54,9 @@ void loop() {
 		File next_file = ROOT.openNextFile();
 		if ( !next_file ){
 			ROOT.rewindDirectory();
-			return
+			return;
+		} else {
+			play_audio( next_file.name() );
 		}
 	}
-
-	AUDIO.play( next_file.name() );
-	Serial.println( "Playing file: " );
-	Serial.println( ROOT.name() );
 }
