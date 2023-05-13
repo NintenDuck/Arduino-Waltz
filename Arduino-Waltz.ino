@@ -5,14 +5,14 @@
 #define next
 #defin _pause
 
-TMRpcm audio;
-File root;
+TMRpcm AUDIO;
+File ROOT;
 
 char sd_root = "/"
 
-int speaker_pin = 9;
-int default_audio_volume = 7;
-int default_audio_quality = 1;
+int SPEAKER_PIN = 9;
+int DEFAULT_AUDIO_VOLUME = 7;
+int DEFAULT_AUDIO_QUALITY = 1;
 
 void init_sd(){
 	Serial.print( "Initializing SD card..." );
@@ -24,9 +24,9 @@ void init_sd(){
 }
 
 void init_audio(){
-	audio.speakerPin = speakerPin;
-	audio.setVolume( default_audio_volume );
-	audio.quality( default_audio_quality );
+	AUDIO.speakerPin = speakerPin;
+	AUDIO.setVolume( DEFAULT_AUDIO_VOLUME );
+	AUDIO.quality( DEFAULT_AUDIO_QUALITY );
 }
 
 void setup() {
@@ -36,20 +36,20 @@ void setup() {
 	init_sd();
 	init_audio();
 	
-	root = SD.open( sd_root );
+	ROOT = SD.open( sd_root );
 }
 
 
 void loop() {
-	if ( !audio.isPlaying() ){
-		File next_file = root.openNextFile();
+	if ( !AUDIO.isPlaying() ){
+		File next_file = ROOT.openNextFile();
 		if ( !next_file ){
-			root.rewindDirectory();
+			ROOT.rewindDirectory();
 			return
 		}
 	}
-	
-	audio.play( next_file.name() );
+
+	AUDIO.play( next_file.name() );
 	Serial.println( "Playing file: " );
-	Serial.println( root.name() );
+	Serial.println( ROOT.name() );
 }
