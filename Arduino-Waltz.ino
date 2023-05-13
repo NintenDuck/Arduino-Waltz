@@ -3,7 +3,7 @@
 #include "TMRpcm.h"
 
 #define NEXT
-#defin _PAUSE
+#define _PAUSE
 
 TMRpcm AUDIO;
 File ROOT;
