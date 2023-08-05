@@ -8,7 +8,7 @@
 TMRpcm AUDIO;
 File ROOT;
 
-char SD_ROOT = "/";
+char* SD_ROOT = "/";
 
 int SPEAKER_PIN = 9;
 
@@ -30,8 +30,9 @@ void init_audio(){
 	AUDIO.quality( DEFAULT_AUDIO_QUALITY );
 }
 
-void play_audio( char* song_name='none' ){
-	if ( song_name == 'none' ) return;
+void play_audio( char* song_name="none" ){
+	// char* void_song = "none"
+	if ( song_name == "none" ) return;
 
 	AUDIO.play( song_name );
 	Serial.print( "Playing song: " );
