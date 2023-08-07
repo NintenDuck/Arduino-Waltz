@@ -40,13 +40,13 @@ void play_audio( char* song_name="none" ){
 }
 
 void setup() {
-	Serial.begin(9600);
+	Serial.begin( 9600 );
 	while ( !Serial );
 	
 	init_sd();
 	init_audio();
 	
-	ROOT = SD.open( SD_ROOT );
+	ROOT = SD.open( SD_ROOT, FILE_READ );
 }
 
 
